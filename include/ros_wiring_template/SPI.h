@@ -6,6 +6,26 @@
 #define MSBFIRST 0
 
 #define SPI_MODE0 0
+#define SPI_MODE1 1
+#define SPI_MODE2 2
+
+
+class SPISettings
+{
+    public:
+    SPISettings()
+    {
+
+    }
+    
+    SPISettings(uint32_t, uint8_t, uint8_t)
+    {
+
+    }
+
+
+};
+
 
 class SPIClass
 {
@@ -36,8 +56,17 @@ class SPIClass
 
     }
 
-};
+    static void beginTransaction(SPISettings&)
+    {
 
+    }
+
+    static void endTransaction()
+    {
+
+    }
+
+};
 extern SPIClass SPI;
 
 #endif

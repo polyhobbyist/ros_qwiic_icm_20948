@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(ros_template)
+project(ros_wiring_template)
 
 # Default to C99
 if(NOT CMAKE_C_STANDARD)
@@ -25,7 +25,10 @@ endif()
 add_executable(${PROJECT_NAME} 
   src/main.cpp
   src/SPI.cpp
-  src/SparkFun_Serial_Controlled_Motor_Driver_Arduino_Library-master/src/SCMD.cpp
+  src/Wire.cpp
+  src/Arduino.cpp
+  src/SparkFun_ICM-20948_ArduinoLibrary/src/util/ICM_20948_C.c
+  src/SparkFun_ICM-20948_ArduinoLibrary/src/ICM_20948.cpp
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
@@ -66,6 +69,8 @@ find_package(Boost REQUIRED system)
 include_directories(
   include/${PROJECT_NAME}
   ${SOURCE_DIR}/include
+  src/ros_wiring_template/src/SparkFun_ICM-20948_ArduinoLibrary/src/util/
+  src/ros_wiring_template/src/SparkFun_ICM-20948_ArduinoLibrary/src/
 )
 
 ament_target_dependencies(${PROJECT_NAME} 

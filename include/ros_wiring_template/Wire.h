@@ -1,48 +1,35 @@
 #ifndef ARDUINO_WIRE_H
 #define ARDUINO_WIRE_H
 #include "Arduino.h"
+#include "i2c/i2c.h"
+#include <string>
+#include <vector>
 
-class WireClass
+class TwoWire
 {
-    public:
-    static void begin()
-    {
+    std::string _bus;
+    int _i2cFileDescriptor;
+    I2CDevice _i2cDevice;
 
-    }
+    std::vector<uint8_t> _writeBuffer;
+    std::vector<uint8_t> _readBuffer;
+    size_t _readIndex;
 
-    static void beginTransmission(uint16_t id)
-    {
 
-    }
-
-    static void endTransmission()
-    {
-
-    }
-
-    static bool available()
-    {
-        return false;
-    }
-
-    static uint8_t read()
-    {
-        return 0;
-
-    }
-
-    static void write(uint8_t value)
-    {
-        
-    }
-
-    static void requestFrom(uint16_t, size_t)
-    {
-
-    }
-
+public:
+    TwoWire(std::string bus = "/dev/i2c-1");
+    
+    void begin();
+    void beginTransmission(uint16_t id);
+    void endTransmission(bool end = true);
+    bool available();
+    uint8_t read();
+    void write(uint8_t value);
+    void write(uint8_t* value, size_t len);
+    uint32_t requestFrom(uint16_t, size_t);
 };
 
-extern WireClass Wire;
+
+extern TwoWire Wire;
 
 #endif

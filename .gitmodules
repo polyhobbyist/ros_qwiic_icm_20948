@@ -1,0 +1,3 @@
+[submodule "src/SparkFun_ICM-20948_ArduinoLibrary"]
+	path = src/SparkFun_ICM-20948_ArduinoLibrary
+	url = https://github.com/sparkfun/SparkFun_ICM-20948_ArduinoLibrary.git
