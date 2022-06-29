@@ -24,9 +24,9 @@ endif()
 
 add_executable(${PROJECT_NAME} 
   src/main.cpp
-  src/SPI.cpp
-  src/Wire.cpp
-  src/Arduino.cpp
+  src/wiring_for_ros/SPI.cpp
+  src/wiring_for_ros/Wire.cpp
+  src/wiring_for_ros/Arduino.cpp
   src/SparkFun_ICM-20948_ArduinoLibrary/src/util/ICM_20948_C.c
   src/SparkFun_ICM-20948_ArduinoLibrary/src/ICM_20948.cpp
 )
@@ -62,21 +62,20 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
-find_package(geometry_msgs REQUIRED)
-find_package(std_msgs REQUIRED)
+find_package(sensor_msgs REQUIRED)
 find_package(Boost REQUIRED system)
 
 include_directories(
   include/${PROJECT_NAME}
   ${SOURCE_DIR}/include
-  src/ros_wiring_template/src/SparkFun_ICM-20948_ArduinoLibrary/src/util/
-  src/ros_wiring_template/src/SparkFun_ICM-20948_ArduinoLibrary/src/
+  src/wiring_for_ros/include
+  src/SparkFun_ICM-20948_ArduinoLibrary/src/util/
+  src/SparkFun_ICM-20948_ArduinoLibrary/src/
 )
 
 ament_target_dependencies(${PROJECT_NAME} 
   rclcpp
-  std_msgs
-  geometry_msgs
+  sensor_msgs
   Boost)
 
 install(TARGETS ${PROJECT_NAME}

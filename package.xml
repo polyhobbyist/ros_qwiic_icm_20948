@@ -8,8 +8,8 @@
   <license>MIT</license>
 
   <depend>rclcpp</depend>
-  <depend>geometry_msgs</depend>
   <depend>std_msgs</depend>
+  <depend>sensor_msgs</depend>
   <depend>libboost-system-dev</depend>
   <depend>libi2c</depend>
   
