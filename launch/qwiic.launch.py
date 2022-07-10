@@ -7,8 +7,8 @@ from launch_ros.actions import Node
 def generate_launch_description():
     return LaunchDescription([
         Node(
-            package='ros_qwiic_servo',
-            executable='ros_qwiic_servo',
-            name='ros_qwiic_servo',
+            package='ros_qwiic_icm_20948',
+            executable='ros_qwiic_icm_20948',
+            name='ros_qwiic_icm_20948',
             output='screen'),
     ])

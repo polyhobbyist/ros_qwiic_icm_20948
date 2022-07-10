@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>ros_wiring_template</name>
+  <name>ros_qwiic_icm_20948</name>
   <version>0.0.0</version>
-  <description>ROS2 package for Including Arduino code in ROS</description>
+  <description>ROS2 package for the ICM20948</description>
   <maintainer email="lou@polyhobbyist.com">Lou Amadio</maintainer>
   <license>MIT</license>
 

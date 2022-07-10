@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(ros_wiring_template)
+project(ros_qwiic_icm_20948)
 
 # Default to C99
 if(NOT CMAKE_C_STANDARD)

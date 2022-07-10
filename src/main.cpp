@@ -37,21 +37,20 @@ SOFTWARE.
                        // On the SparkFun 9DoF IMU breakout the default is 1, and when 
                        // the ADR jumper is closed the value becomes 0
 
-float MicroTeslaToTesla(float mT)
+inline float MicroTeslaToTesla(float mT)
 {
   return mT * 1000000;
 }
 
-float MiniGToMeterPerSecond(float g)
+inline float MilliGToMeterPerSecond(float g)
 {
   return g * 1000 * 9.80665;
 }
 
-float DegreesPerSecondToRadsPerSecond(float dps)
+inline float DegreesPerSecondToRadsPerSecond(float dps)
 {
-  return dps * 57.295779578552;
+  return dps * 0.01745;
 }
-
 
 using namespace std::chrono_literals;
 using std::placeholders::_1;
@@ -60,7 +59,7 @@ class I2CPublisher : public rclcpp::Node
 {
   public:
     I2CPublisher()
-    : Node("i2cpublisher")
+    : Node("ros_qwiic_icm_20948")
     , _id(0) 
     {
       get_parameter_or<uint8_t>("id", _id, 0x5D); 
@@ -69,6 +68,9 @@ class I2CPublisher : public rclcpp::Node
       get_parameter_or<std::string>("topicMag", _topicMag, "/imu/mag"); 
       get_parameter_or<double>("poll", _poll, 15.0);
 
+      Wire.begin();
+      Wire.setAddressSize(1); 
+      Wire.setPageBytes(256);
       myICM.begin(Wire, AD0_VAL);
 
       _publisherImu = this->create_publisher<sensor_msgs::msg::Imu>(_topicImu, 10);
@@ -95,10 +97,10 @@ class I2CPublisher : public rclcpp::Node
 
         auto messageImu = sensor_msgs::msg::Imu();
         messageImu.header.frame_id = _frameId;
-        messageImu.header.stamp = rclcpp::Clock().now();
-        messageImu.linear_acceleration.x = MiniGToMeterPerSecond(myICM.accX());
-        messageImu.linear_acceleration.y = MiniGToMeterPerSecond(myICM.accY());
-        messageImu.linear_acceleration.z = MiniGToMeterPerSecond(myICM.accZ());
+        messageImu.header.stamp = messageMag.header.stamp;
+        messageImu.linear_acceleration.x = MilliGToMeterPerSecond(myICM.accX());
+        messageImu.linear_acceleration.y = MilliGToMeterPerSecond(myICM.accY());
+        messageImu.linear_acceleration.z = MilliGToMeterPerSecond(myICM.accZ());
 
         messageImu.angular_velocity.x = DegreesPerSecondToRadsPerSecond(myICM.gyrX());
         messageImu.angular_velocity.y = DegreesPerSecondToRadsPerSecond(myICM.gyrY());
